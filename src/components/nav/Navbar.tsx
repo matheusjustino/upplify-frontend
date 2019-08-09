@@ -4,20 +4,27 @@ import NavItem from './NavItem';
 
 interface myProps { }
 interface myState {
-    renderItem: string
+    renderItem: string,
+    itens?: {}
 }
 export default class Navbar extends React.Component<myProps, myState> {
 
     constructor(props: myProps) {
         super(props);
         this.state = {
-            renderItem: "All"
+            renderItem: "All",
+            itens: [{p: 8, id: 0, name: 'cake'}, {p: 17, id: 1, name: 'chinese'}, {p: 4, id: 2, name: 'salad'}, {p: 20, id: 3, name: 'chinese'}, {p: 5, id: 4, name: 'cake'}, {p: 16, id: 5, name: 'burguers'}, {p: 0, id: 6, name: 'salad'}, {p: 2, id: 7, name: 'cake'}, {p: 3, id: 8, name: 'pizza'}, {p: 2, id: 9, name: 'salad'}, {p: 4, id: 10, name: 'pizza'}, {p: 11, id: 11, name: 'cake'}, {p: 20, id: 12, name: 'chinese'}, {p: 5, id: 13, name: 'cake'}, {p: 1, id: 14, name: 'salad'}, {p: 14, id: 15, name: 'chinese'}, {p: 11, id: 16, name: 'salad'}, {p: 4, id: 17, name: 'pizza'}, {p: 1, id: 18, name: 'burguers'}, {p: 5, id: 19, name: 'chinese'}]
         }
         this.printItem = this.printItem.bind(this);
+        this.listItens = this.listItens.bind(this);
     }
 
     componentDidMount() {
-        console.log(this.state.renderItem);
+        render(this.state.renderItem);
+    }
+
+    listItens(e:string):any {
+        render(this.state.renderItem);
     }
 
     printItem(e: string) {
@@ -54,7 +61,7 @@ export default class Navbar extends React.Component<myProps, myState> {
                     <a href="#">Carrinho</a>
                 </div>
                 <div className="container">
-                    {renderItem}
+                    {render(this.state.renderItem)}
                 </div>    
             </div>
         );
@@ -62,17 +69,45 @@ export default class Navbar extends React.Component<myProps, myState> {
 }
 
 
-const item = [{id: 0, p: 10, name: 'item'},{id: 1, p: 10, name: 'item'},{id: 2, p: 10, name: 'item'},{id: 3, p: 10, name: 'item'},{id: 4, p: 10, name: 'item'},{id: 5, p: 10, name: 'item'},{id: 6, p: 10, name: 'item'},{id: 7, p: 10, name: 'item'},];
-const renderItem = item.map(i => {
-    return (
-        <div key={i.id} className="col-md-3 col-lg-3 col-sm-3">
-            <div className="thumbnail text-center">
-                <a onClick={() => addItem(i)} href="#">Item</a>
-            </div>
-        </div>
-    );
-});
+/////////////////////// FUNCTIONS /////////////////////
 
+
+function render(e:string):any {
+    //for(let i = 0; i < item.length; i++) item[i].name = e;
+    if (e === "All") {
+        return item.map(i => {
+        return (
+            <div key={i.id} className="col-md-3 col-lg-3 col-sm-3">
+                <div className="thumbnail text-center">
+                    <a onClick={() => addItem(i)} href="#">{i.name}</a>
+                </div>
+            </div>
+        )
+    });
+    } else {
+        let newItens = [];
+        for(let i = 0; i < item.length; i++) {
+            if (item[i].name === e) newItens.push(item[i]);
+        }
+
+        return newItens.map(i => {
+
+                console.log(i.name);
+                console.log(e)
+                return (
+                    <div key={i.id} className="col-md-3 col-lg-3 col-sm-3">
+                        <div className="thumbnail text-center">
+                            <a onClick={() => addItem(i)} href="#">{i.name}</a>
+                        </div>
+                    </div>
+                )
+            
+        })
+    }
+}
+
+//let item = [{id: 0, p: 10, name: 'item'},{id: 1, p: 10, name: 'item'},{id: 2, p: 10, name: 'item'},{id: 3, p: 10, name: 'item'},{id: 4, p: 10, name: 'item'},{id: 5, p: 10, name: 'item'},{id: 6, p: 10, name: 'item'},{id: 7, p: 10, name: 'item'}];
+let item = [{p: 8, id: 0, name: 'cake'}, {p: 17, id: 1, name: 'chinese'}, {p: 4, id: 2, name: 'salad'}, {p: 20, id: 3, name: 'chinese'}, {p: 5, id: 4, name: 'cake'}, {p: 16, id: 5, name: 'burguers'}, {p: 0, id: 6, name: 'salad'}, {p: 2, id: 7, name: 'cake'}, {p: 3, id: 8, name: 'pizza'}, {p: 2, id: 9, name: 'salad'}, {p: 4, id: 10, name: 'pizza'}, {p: 11, id: 11, name: 'cake'}, {p: 20, id: 12, name: 'chinese'}, {p: 5, id: 13, name: 'cake'}, {p: 1, id: 14, name: 'salad'}, {p: 14, id: 15, name: 'chinese'}, {p: 11, id: 16, name: 'salad'}, {p: 4, id: 17, name: 'pizza'}, {p: 1, id: 18, name: 'burguers'}, {p: 5, id: 19, name: 'chinese'}]
 const addItem = (e:any) => {
     let basket:any = document.getElementById('mySidebar');
     let a = document.createElement('a');
