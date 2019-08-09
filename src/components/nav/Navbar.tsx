@@ -40,6 +40,7 @@ export default class Navbar extends React.Component<myProps, myState> {
                     <div className="collapse navbar-collapse" id="nav-collapse">
                         <ul className="nav navbar-nav">
                             <li><a onClick={(event: any) => this.printItem('All')} href="#">All <i className="fas fa-utensils"></i></a></li>
+                            <li><a onClick={(event: any) => this.printItem('Chinese')} href="#">Chinese <i className="fas fa-cloud-meatball"></i></a></li>
                             <li><a onClick={(event: any) => this.printItem('Burguers')} href="#">Burguers <i className="fas fa-hamburger"></i></a></li>
                             <li><a onClick={(event: any) => this.printItem('Salad')} href="#">Salad <i className="fas fa-apple-alt"></i></a></li>
                             <li><a onClick={(event: any) => this.printItem('Cake')} href="#">Cake <i className="fas fa-cheese"></i></a></li>
