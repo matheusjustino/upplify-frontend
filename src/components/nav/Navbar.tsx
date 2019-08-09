@@ -1,11 +1,11 @@
-import React, { MouseEventHandler } from 'react';
+/* eslint-disable */
+import React from 'react';
 import NavItem from './NavItem';
 
 interface myProps { }
 interface myState {
     renderItem: string
 }
-/* eslint-disable */
 export default class Navbar extends React.Component<myProps, myState> {
 
     constructor(props: myProps) {
@@ -45,24 +45,46 @@ export default class Navbar extends React.Component<myProps, myState> {
                             <li><a onClick={(event: any) => this.printItem('Salad')} href="#">Salad <i className="fas fa-apple-alt"></i></a></li>
                             <li><a onClick={(event: any) => this.printItem('Cake')} href="#">Cake <i className="fas fa-cheese"></i></a></li>
                             <li><a onClick={(event: any) => this.printItem('Pizza')} href="#">Pizza <i className="fas fa-pizza-slice"></i></a></li>
-                            <li><a onClick={(event: any) => openNav(event)} href="#">Order <i className="fas fa-shopping-cart"></i></a></li>
+                            <li><a onClick={() => openSideBar()} href="#">Order <i className="fas fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                 </nav>
                 <div id="mySidebar" className="sidebar">
-                    <a href="#" className="closebtn" onClick={(event: any) => closeNav(event)}>×</a>
+                    <a href="#" className="closebtn" onClick={() => closeSideBar()}>×</a>
                     <a href="#">Carrinho</a>
                 </div>
-                {this.state.renderItem}
+                <div className="container">
+                    {renderItem}
+                </div>    
             </div>
         );
     }
 }
 
 
+const item = [{id: 0, p: 10, name: 'item'},{id: 1, p: 10, name: 'item'},{id: 2, p: 10, name: 'item'},{id: 3, p: 10, name: 'item'},{id: 4, p: 10, name: 'item'},{id: 5, p: 10, name: 'item'},{id: 6, p: 10, name: 'item'},{id: 7, p: 10, name: 'item'},];
+const renderItem = item.map(i => {
+    return (
+        <div key={i.id} className="col-md-3 col-lg-3 col-sm-3">
+            <div className="thumbnail text-center">
+                <a onClick={() => addItem(i)} href="#">Item</a>
+            </div>
+        </div>
+    );
+});
+
+const addItem = (e:any) => {
+    let basket:any = document.getElementById('mySidebar');
+    let a = document.createElement('a');
+    let p = document.createTextNode(e.p);
+    let t = document.createTextNode(e.name);
+    a.appendChild(p)
+    a.appendChild(t);
+    basket.appendChild(a);
+}
 
 let bool = true;
-function openNav(event:MouseEventHandler) {
+function openSideBar() {
     let mySidebar:any = document.getElementById("mySidebar");
     if (bool) {
         mySidebar.style.width = "250px";
@@ -73,7 +95,7 @@ function openNav(event:MouseEventHandler) {
     }
 }
   
-function closeNav(event:MouseEventHandler) {
+function closeSideBar() {
     let mySidebar:any = document.getElementById("mySidebar");
     mySidebar.style.width = "0px";
     bool = !bool;
