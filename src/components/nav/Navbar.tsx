@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import NavItem from './NavItem';
 
 interface myProps { }
@@ -20,7 +20,7 @@ export default class Navbar extends React.Component<myProps, myState> {
         console.log(this.state.renderItem);
     }
 
-    printItem(e:string) {
+    printItem(e: string) {
         this.setState({ renderItem: e });
         console.log(e);
     }
@@ -45,26 +45,36 @@ export default class Navbar extends React.Component<myProps, myState> {
                             <li><a onClick={(event: any) => this.printItem('Salad')} href="#">Salad <i className="fas fa-apple-alt"></i></a></li>
                             <li><a onClick={(event: any) => this.printItem('Cake')} href="#">Cake <i className="fas fa-cheese"></i></a></li>
                             <li><a onClick={(event: any) => this.printItem('Pizza')} href="#">Pizza <i className="fas fa-pizza-slice"></i></a></li>
-                            <li><a href="#">Order <i className="fas fa-shopping-cart"></i></a></li>
+                            <li><a onClick={(event: any) => openNav(event)} href="#">Order <i className="fas fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                 </nav>
+                <div id="mySidebar" className="sidebar">
+                    <a href="#" className="closebtn" onClick={(event: any) => closeNav(event)}>×</a>
+                    <a href="#">Carrinho</a>
+                </div>
                 {this.state.renderItem}
             </div>
         );
     }
 }
 
-/*const navItens = [
-    { id: 0, title: "All" },
-    { id: 1, title: "Chinese" },
-    { id: 2, title: "Burguers" },
-    { id: 3, title: "Salad" },
-    { id: 4, title: "Cake" },
-    { id: 5, title: "Pizza" }
-];
- 
-{navItens.map(function (navItem) {
-                                return <NavItem key={navItem.id} id={navItem.id} title={navItem.title} ></NavItem>
-                            })}
-*/
+
+
+let bool = true;
+function openNav(event:MouseEventHandler) {
+    let mySidebar:any = document.getElementById("mySidebar");
+    if (bool) {
+        mySidebar.style.width = "250px";
+        bool = !bool;
+    } else {
+        mySidebar.style.width = "0px";
+        bool = !bool;
+    }
+}
+  
+function closeNav(event:MouseEventHandler) {
+    let mySidebar:any = document.getElementById("mySidebar");
+    mySidebar.style.width = "0px";
+    bool = !bool;
+}
