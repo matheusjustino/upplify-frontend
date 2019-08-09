@@ -1,13 +1,28 @@
 import React from 'react';
 import NavItem from './NavItem';
 
+interface myProps {}
+interface myState {
+    renderItem: string
+}
 
-export default class Navbar extends React.Component {
+export default class Navbar extends React.Component<myProps, myState> {
+
+    constructor(props:myProps) {
+        super(props);
+        this.state = {
+            renderItem: "All"
+        }
+    }
+
+    componentDidMount() {
+        console.log(this.state.renderItem);
+    }
 
     render() {
         return (
             <div>
-                <nav id="navMain" className="navbar navbar-default" style={{background:'#e17055'}}>
+                <nav id="navMain" className="navbar navbar-default" style={{background: '#e17055'}}>
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
                             <span className="icon-bar"></span>

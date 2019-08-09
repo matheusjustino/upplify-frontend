@@ -20,13 +20,17 @@ export default class NavItem extends React.Component<myProps, myState> {
             id: this.props.id,
             title: this.props.title
         }
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
+    onSubmit() {
+        console.log(this.state.title);
+    }
 
     render() {
         return(
             <li key={this.state.id}>
-                <a style={{color:'black'}} href="#">{this.state.title}</a>
+                <a onClick={this.onSubmit} style={{color:'black'}} href="#">{this.state.title}</a>
             </li>
         );
     }
