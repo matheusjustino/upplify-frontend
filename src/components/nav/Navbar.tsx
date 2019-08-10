@@ -4,6 +4,8 @@ import Products from './Products';
 import Basket from './Basket';
 import Util from './Util';
 
+//json-server public/db.json --port 3001
+
 interface myProps { }
 interface myState {
     renderItems: string,
@@ -32,10 +34,8 @@ export default class Navbar extends React.Component<myProps, myState> {
             products: initItems
         });
         if (localStorage.getItem('cartItems')) {
-            console.log(localStorage.getItem('cartItems'))
             let cart:any = localStorage.getItem('cartItems');
             cart = JSON.parse(cart);
-            console.log(cart)
             this.setState({ cartItems: cart });
         }
     }
@@ -54,14 +54,12 @@ export default class Navbar extends React.Component<myProps, myState> {
                 cartItems.push({ ...product, count: 1 });
             }
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            console.log(localStorage.getItem("cartItems"));
         });
     }
 
     handleRemoveCart(e:any, item:any) {
         this.setState(state => {
             const cartItems = state.cartItems.filter((elm:any) => elm.id !== item.id);
-            //console.log(cartItems)
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             return { cartItems: cartItems };
         });
@@ -138,18 +136,4 @@ export default class Navbar extends React.Component<myProps, myState> {
             </div>
         );
     }
-}
-
-
-/////////////////////// FUNCTIONS /////////////////////
-
-//json-server public/db.json --port 3001
-const addItem = (e: any) => {
-    let basket: any = document.getElementById('mySidebar');
-    let a = document.createElement('a');
-    let p = document.createTextNode(e.p);
-    let t = document.createTextNode(e.name);
-    a.appendChild(p)
-    a.appendChild(t);
-    basket.appendChild(a);
 }
