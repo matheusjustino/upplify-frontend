@@ -1,13 +1,15 @@
 /* eslint-disable */
 import React from 'react';
 import Products from './Products';
+import Basket from './Basket';
 import Util from './Util';
 
 interface myProps { }
 interface myState {
     renderItems: string,
     bool: boolean,
-    products?: any
+    products?: any,
+    cartItems?: any,
 }
 export default class Navbar extends React.Component<myProps, myState> {
 
@@ -16,20 +18,53 @@ export default class Navbar extends React.Component<myProps, myState> {
         this.state = {
             renderItems: "All",
             bool: true,
-            products: []
+            products: [],
+            cartItems: []
         }
         this.renderItems = this.renderItems.bind(this);
+        this.handleAddToCart = this.handleAddToCart.bind(this);
+        this.handleRemoveCart = this.handleRemoveCart.bind(this);
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         const initItems = await Util.getAllItems();
         this.setState({
             products: initItems
         });
+        if (localStorage.getItem('cartItems')) {
+            console.log(localStorage.getItem('cartItems'))
+            let cart:any = localStorage.getItem('cartItems');
+            cart = JSON.parse(cart);
+            console.log(cart)
+            this.setState({ cartItems: cart });
+        }
     }
 
-    handleAddToCart() {
+    handleAddToCart(e:any, product:any) {
+        this.setState(state => {
+            const cartItems = this.state.cartItems;
+            let productAlreadyInCart = false;
+            cartItems.forEach((item:any) => {
+                if (item.id === product.id) {
+                    productAlreadyInCart = true;
+                    item.count++;
+                }
+            });
+            if (!productAlreadyInCart) {
+                cartItems.push({ ...product, count: 1 });
+            }
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            console.log(localStorage.getItem("cartItems"));
+        });
+    }
 
+    handleRemoveCart(e:any, item:any) {
+        this.setState(state => {
+            const cartItems = state.cartItems.filter((elm:any) => elm.id !== item.id);
+            //console.log(cartItems)
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            return { cartItems: cartItems };
+        });
     }
 
     openSideBar() {
@@ -93,10 +128,11 @@ export default class Navbar extends React.Component<myProps, myState> {
                 <div id="mySidebar" className="sidebar">
                     <a href="#" className="closebtn" onClick={() => this.closeSideBar()}>×</a>
                     <a href="#">Carrinho</a>
+                    <Basket cartItems={this.state.cartItems} handleRemoveFromCart={this.handleRemoveCart}></Basket>
                 </div>
                 <div className="container">
                     <div>
-                        <Products products={this.state.products}></Products>
+                        <Products products={this.state.products} handleAddToCart={this.handleAddToCart}></Products>
                     </div>
                 </div>
             </div>
@@ -107,7 +143,7 @@ export default class Navbar extends React.Component<myProps, myState> {
 
 /////////////////////// FUNCTIONS /////////////////////
 
-
+//json-server public/db.json --port 3001
 const addItem = (e: any) => {
     let basket: any = document.getElementById('mySidebar');
     let a = document.createElement('a');
