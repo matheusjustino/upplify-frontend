@@ -34,17 +34,17 @@ export default class Navbar extends React.Component<myProps, myState> {
             products: initItems
         });
         if (localStorage.getItem('cartItems')) {
-            let cart:any = localStorage.getItem('cartItems');
+            let cart: any = localStorage.getItem('cartItems');
             cart = JSON.parse(cart);
             this.setState({ cartItems: cart });
         }
     }
 
-    handleAddToCart(e:any, product:any) {
+    handleAddToCart(e: any, product: any) {
         this.setState(state => {
-            const cartItems = this.state.cartItems;
+            const cartItems = state.cartItems;
             let productAlreadyInCart = false;
-            cartItems.forEach((item:any) => {
+            cartItems.forEach((item: any) => {
                 if (item.id === product.id) {
                     productAlreadyInCart = true;
                     item.count++;
@@ -54,12 +54,13 @@ export default class Navbar extends React.Component<myProps, myState> {
                 cartItems.push({ ...product, count: 1 });
             }
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            return cartItems;
         });
     }
 
-    handleRemoveCart(e:any, item:any) {
+    handleRemoveCart(e: any, item: any) {
         this.setState(state => {
-            const cartItems = state.cartItems.filter((elm:any) => elm.id !== item.id);
+            const cartItems = state.cartItems.filter((elm: any) => elm.id !== item.id);
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             return { cartItems: cartItems };
         });
@@ -68,7 +69,7 @@ export default class Navbar extends React.Component<myProps, myState> {
     openSideBar() {
         let mySidebar: any = document.getElementById("mySidebar");
         if (this.state.bool) {
-            mySidebar.style.width = "300px";
+            mySidebar.style.width = "360px";
             this.setState({ bool: !this.state.bool });
         } else {
             mySidebar.style.width = "0px";
@@ -123,16 +124,37 @@ export default class Navbar extends React.Component<myProps, myState> {
                         </ul>
                     </div>
                 </nav>
-                <div id="mySidebar" className="sidebar">
-                    <a href="#" className="closebtn" onClick={() => this.closeSideBar()}>×</a>
-                    <a href="#">Carrinho</a>
+                <div style={{ borderRight: '1px solid' }} id="mySidebar" className="sidebar">
+                    <a style={{color:'white'}} href="#" className="closebtn" onClick={() => this.closeSideBar()}>×</a>
+                    <a style={{color:'white'}} href="#">Shopping Cart <i className="fas fa-shopping-cart"></i></a>
+                    <hr style={{ width: '90%' }}></hr>
                     <Basket cartItems={this.state.cartItems} handleRemoveFromCart={this.handleRemoveCart}></Basket>
                 </div>
-                <div className="container">
+                <div id="style-1" data-spy="scroll" className="scrollspy container" style={{ marginTop: '60px' }}>
                     <div>
                         <Products products={this.state.products} handleAddToCart={this.handleAddToCart}></Products>
                     </div>
                 </div>
+
+                <section id="footer" style={{ background: '#e17055' }}>
+                    <div className="container">
+                        <div className="row text-center text-xs-center text-sm-left text-md-left">
+                            <div className="row">
+                                <div className="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                                    <h4><b style={{color:'white'}}>Social</b></h4>
+                                    <hr style={{width:'100%'}}></hr>
+                                    <ul className="list-unstyled list-inline social text-center">
+                                        <li className="list-inline-item"><a href="#"><i className="fab fa-facebook"></i></a></li>
+                                        <li className="list-inline-item"><a href="#"><i className="fab fa-twitter"></i></a></li>
+                                        <li className="list-inline-item"><a href="#"><i className="fab fa-instagram"></i></a></li>
+                                        <li className="list-inline-item"><a href="#"><i className="fab fa-google-plus"></i></a></li>
+                                        <li className="list-inline-item"><a href="#"><i className="fas fa-envelope"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         );
     }

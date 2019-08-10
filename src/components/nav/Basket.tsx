@@ -6,30 +6,33 @@ export default class Basket extends React.Component<any> {
 
     render() {
         //console.log(this.props);
-        const { cartItems } = this.props;
+        let { cartItems } = this.props;
 
         return (
-            <div className="alert alert-info">
-                {cartItems.length === 0 ? "Basket is empty" : <div>You have {cartItems.length} products in the basket.</div>}
-                {cartItems.length > 0 &&
-                    <div>
-                        <ul>
-                            {cartItems.map((item: any) => {
-                                return (
-                                    <li key={item.id}>
-                                        <b>{item.title}</b>
-                                        X {item.count} = {Util.formatCurrency(item.price * item.count)}
-                                        <button className="btn btn-danger" onClick={(e: any) => this.props.handleRemoveFromCart(e, item)}>X</button>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                        Total: {Util.formatCurrency(cartItems.reduce((a: any, c: any) => (a + c.price * c.count), 0))}
-                        <br />
-                        <button className="btn btn-primary" onClick={() => alert("Checkout needs to implement...")}>
-                            Checkout
+            <div className="container-fluid" style={{ fontSize: '12px' }}>
+                <div className="alert alert-info">
+                    <h4><b>{cartItems.length === 0 ? <b>Basket is empty</b> : <div><b>You have {cartItems.length} different products in the basket.</b></div>}</b></h4>
+
+                    {cartItems.length > 0 &&
+                        <div>
+                            <ul className="list-group">
+                                {cartItems.map((item: any) => {
+                                    return (
+                                        <li style={{fontSize: '1.3rem'}} className="list-group-item" key={item.id}>
+                                            <b>{item.title} X {item.count} = {Util.formatCurrency(item.price * item.count)}</b>
+                                            {/* <i onClick={(e: any) => this.props.handleRemoveFromCart(e, item)} className="small material-icons">clear</i> */}
+                                            <i  onClick={(e: any) => this.props.handleRemoveFromCart(e, item)}className="fas fa-times-circle fa-lg"></i>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                            <b style={{fontSize:'1.18em'}}>Total: {Util.formatCurrency(cartItems.reduce((a: any, c: any) => (a + c.price * c.count), 0))}</b>
+                            <br />
+                            <button className="btn btn-primary" onClick={() => alert("Checkout needs to implement...")}>
+                                Checkout
                         </button>
-                    </div>}
+                        </div>}
+                </div>
             </div>
         );
     }
