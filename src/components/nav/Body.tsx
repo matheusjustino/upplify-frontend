@@ -11,7 +11,7 @@ import Util from './Util';
 
 export default function Body() {
     const [renderItemsState, setRenderItems] = useState("All");
-    const [boolState, setBool] = useState(true);
+    const [sidebarClosed, setSidebarClosed] = useState(false);
     const [productsState, setProducts] = useState([]);
     const [cartItemsState, setCartItems] = useState([]);
 
@@ -32,6 +32,14 @@ export default function Body() {
     /* function para adicionar um item ao carrinho */
     function handleAddToCart(product: string) {
         const cartItems = Util.Add(cartItemsState, product);
+        /* abrir o sidebar após adicionar um item ao carrinho (se o carrinho estiver vazio) */
+        if (!cartItemsState.length) {
+            if (sidebarClosed === false) {
+                let mySideBar: any = document.getElementById("mySidebar");
+                mySideBar.style.width = "360px";
+                setSidebarClosed(!sidebarClosed);
+            }
+        }
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         setCartItems(cartItems);
         return cartItems;
@@ -48,20 +56,22 @@ export default function Body() {
     /* function que abre um sidebar para visualizar os itens do carrinho */
     function openSideBar() {
         let mySideBar: any = document.getElementById("mySidebar");
-        if (boolState) {
+        if (sidebarClosed === false) {
             mySideBar.style.width = "360px";
-            setBool(!boolState);
+            setSidebarClosed(!sidebarClosed);
         } else {
             mySideBar.style.width = "0px";
-            setBool(!boolState);
+            setSidebarClosed(!sidebarClosed);
         }
     }
 
     /* function para fechar o sidebar */
     function closeSideBar() {
         let mySideBar: any = document.getElementById("mySidebar");
-        mySideBar.style.width = "0px";
-        setBool(!boolState);
+        if (sidebarClosed) {
+            mySideBar.style.width = "0px";
+            setSidebarClosed(!sidebarClosed);
+        }
     }
 
     /* function para renderizar os itens de acordo com a categoria */
