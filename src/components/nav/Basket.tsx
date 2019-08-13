@@ -3,13 +3,18 @@ import React, { useState, useEffect } from 'react';
 import Util from './Util';
 import swal from 'sweetalert';
 
-export default function Basket(props: any) {
-    const[cartItems, setCartItems] = useState([]);
+interface myProps {
+    cartItems: never[],
+    handleRemoveFromCart: (e: string) => void
+}
+
+export default function Basket(props: myProps) {
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         setCartItems(props.cartItems);
     }, [props.cartItems]);
-    
+
     //const { cartItems } = props;
     return (
         <div className="container-fluid" style={{ fontSize: '12px' }}>
@@ -23,7 +28,7 @@ export default function Basket(props: any) {
                                 return (
                                     <li style={{ fontSize: '1.3rem' }} className="list-group-item" key={item._id}>
                                         <b>{item.title} X {item.count} = {Util.formatCurrency(item.price * item.count)}</b>
-                                        <i id="removeIcon" onClick={(e: any) => props.handleRemoveFromCart(e, item)} className="fas fa-times-circle fa-lg"></i>
+                                        <i id="removeIcon" onClick={() => props.handleRemoveFromCart(item)} className="fas fa-times-circle fa-lg"></i>
                                     </li>
                                 );
                             })}

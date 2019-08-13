@@ -8,6 +8,7 @@ import Util from './Util';
 // json-server public/db.json --port 3001
 // https://food-delivery-upplify.surge.sh/
 
+
 export default function Body() {
     const [renderItemsState, setRenderItems] = useState("All");
     const [boolState, setBool] = useState(true);
@@ -22,14 +23,14 @@ export default function Body() {
         }
         initLoadItens();
         if (localStorage.getItem('cartItems')) {
-            let cart: any = localStorage.getItem('cartItems');
+            let cart: string | any = localStorage.getItem('cartItems');
             cart = JSON.parse(cart);
             setCartItems(cart);
         }
     }, []);
 
     /* function para adicionar um item ao carrinho */
-    function handleAddToCart(e: any, product: any) {
+    function handleAddToCart(product: string) {
         const cartItems = Util.Add(cartItemsState, product);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         setCartItems(cartItems);
@@ -37,8 +38,8 @@ export default function Body() {
     };
 
     /* function para remover item do carrinho */
-    function handleRemoveCart(e: any, item: any) {
-        const cartItems:any = Util.Remove(cartItemsState, item);
+    function handleRemoveCart(product: string) {
+        const cartItems = Util.Remove(cartItemsState, product);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         setCartItems(cartItems);
         return cartItems;

@@ -1,7 +1,12 @@
 /* eslint-disable */
 import React from 'react';
 
-export default function Navbar(props: any) {
+interface myProps {
+    renderItems: (filter: string) => void,
+    openSideBar: () => void
+}
+
+export default function Navbar(props: myProps) {
 
     return (
         <nav id="navMain" className="navbar navbar-default" style={{ background: '#e17055' }}>
