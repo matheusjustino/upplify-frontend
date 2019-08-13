@@ -1,10 +1,15 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Util from './Util';
 
 export default function Basket(props: any) {
-    const { cartItems } = props;
+    const[cartItems, setCartItems] = useState([]);
 
+    useEffect(() => {
+        setCartItems(props.cartItems);
+    }, [props.cartItems]);
+    
+    //const { cartItems } = props;
     return (
         <div className="container-fluid" style={{ fontSize: '12px' }}>
             <div className="alert alert-info">
@@ -15,7 +20,7 @@ export default function Basket(props: any) {
                         <ul className="list-group">
                             {cartItems.map((item: any) => {
                                 return (
-                                    <li style={{ fontSize: '1.3rem' }} className="list-group-item" key={item.id}>
+                                    <li style={{ fontSize: '1.3rem' }} className="list-group-item" key={item._id}>
                                         <b>{item.title} X {item.count} = {Util.formatCurrency(item.price * item.count)}</b>
                                         <i onClick={(e: any) => props.handleRemoveFromCart(e, item)} className="fas fa-times-circle fa-lg"></i>
                                     </li>

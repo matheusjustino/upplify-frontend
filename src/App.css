@@ -3,7 +3,7 @@
 
 .App {
   text-align: center;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .App-logo {
@@ -38,11 +38,6 @@
   }
 }
 
-
-
-
-
-
 .sidebar {
   height: 100%;
   width: 0;
@@ -65,10 +60,6 @@
   transition: 0.3s;
 }
 
-/*.sidebar a:hover {
-  color: #f1f1f1;
-}*/
-
 .sidebar .closebtn {
   position: absolute;
   top: 0;
@@ -85,10 +76,6 @@
   border: none;
 }*/
 
-.openbtn:hover {
-  background-color: #444;
-}
-
 #main {
   transition: margin-left .5s;
   padding: 16px;
@@ -96,8 +83,12 @@
 
 
 @media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
+  }
 }
 
 .list-group-item {
@@ -174,4 +165,66 @@ section {
     padding-bottom: 0px;
     margin-bottom: 10px;
 }
+}
+
+
+
+/*###################################*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F2EEE9;
+  font: normal 13px/1.5 Georgia, Serif;
+  color: #333;
+}
+
+h4 {
+  font-size: 16px;
+  display: block;
+  border-bottom: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+}
+
+button {
+  border: 1px solid #722A1B;
+  padding: 4px 14px;
+  background-color: #fff;
+  color: #722A1B;
+  text-transform: uppercase;
+  float: right;
+  margin: 5px 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+
+
+/*################################*/
+
+
+
+#products-list {
+    width: 100%;
+    height: 175px;
+    padding: 1em;
+    border-radius: 8px
+}
+
+#products-list:hover {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  transition: all 0.2s;
+}
+
+p, a, h2 {
+  color: #515151;
+  font-weight: 300;
+  padding-top: 10px;
+  font-size: 16px;
 }

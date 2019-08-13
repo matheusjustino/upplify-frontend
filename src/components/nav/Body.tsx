@@ -5,6 +5,8 @@ import Basket from './Basket';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Util from './Util';
+// json-server public/db.json --port 3001
+// https://food-delivery-upplify.surge.sh/
 
 export default function Body() {
     const [renderItemsState, setRenderItems] = useState("All");
@@ -16,7 +18,7 @@ export default function Body() {
     useEffect(() => {
         async function initLoadItens() {
             const initItems = await Util.getAllItems();
-            setProducts(initItems);
+            setProducts(initItems.data);
         }
         initLoadItens();
         if (localStorage.getItem('cartItems')) {
@@ -28,29 +30,18 @@ export default function Body() {
 
     /* function para adicionar um item ao carrinho */
     function handleAddToCart(e: any, product: any) {
-        const cartItems: any = [];
-        let productAlreadyInCart = false;
-        cartItemsState.forEach((item: any) => {
-            if (item.id === product.id) {
-                productAlreadyInCart = true;
-                item.count++;
-            }
-            cartItems.push(item);
-        });
-        if (!productAlreadyInCart) {
-            cartItems.push({ ...product, count: 1 });
-        }
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        const cartItems = Util.Add(cartItemsState, product);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
         setCartItems(cartItems);
         return cartItems;
     };
 
     /* function para remover item do carrinho */
     function handleRemoveCart(e: any, item: any) {
-        const cartItems = cartItemsState.filter((elm: any) => elm.id !== item.id);
+        const cartItems = cartItemsState.filter((elm: any) => elm._id !== item._id);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         setCartItems(cartItems);
-        return { cartItems: cartItems };
+        return { cartItems };
     };
 
     /* function que abre um sidebar para visualizar os itens do carrinho */
@@ -77,7 +68,7 @@ export default function Body() {
         await setRenderItems(e);
         if (e === "All") {
             const getAll = await Util.getAllItems();
-            setProducts(getAll);
+            setProducts(getAll.data);
         } else {
             const filteredItems = await Util.getFilteredItems(e);
             setProducts(filteredItems);
