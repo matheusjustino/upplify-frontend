@@ -38,10 +38,10 @@ export default function Body() {
 
     /* function para remover item do carrinho */
     function handleRemoveCart(e: any, item: any) {
-        const cartItems = cartItemsState.filter((elm: any) => elm._id !== item._id);
+        const cartItems:any = Util.Remove(cartItemsState, item);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         setCartItems(cartItems);
-        return { cartItems };
+        return cartItems;
     };
 
     /* function que abre um sidebar para visualizar os itens do carrinho */
@@ -82,7 +82,7 @@ export default function Body() {
             <div style={{ borderRight: '1px solid' }} id="mySidebar" className="sidebar">
                 <a style={{ color: 'white' }} href="#" className="closebtn" onClick={closeSideBar}>×</a>
                 <a style={{ color: 'white' }} href="#">Shopping Cart <i className="fas fa-shopping-cart"></i></a>
-                <hr style={{ width: '90%' }}></hr>
+                <hr></hr>
                 <Basket cartItems={cartItemsState} handleRemoveFromCart={handleRemoveCart}></Basket>
             </div>
             <div id="style-1" data-spy="scroll" className="scrollspy container" style={{ marginTop: '60px' }}>

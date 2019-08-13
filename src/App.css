@@ -6,22 +6,6 @@
   font-family: 'Raleway', sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
 .App-link {
   color: #61dafb;
@@ -210,11 +194,17 @@ button {
 
 
 
-#products-list {
+products-list {
     width: 100%;
-    height: 175px;
-    padding: 1em;
-    border-radius: 8px
+    height: 150px;
+    border-radius: 8px;
+    margin: 5px 5px;
+}
+.thumbnail {
+  margin: 0;
+}
+.thumbnail > button {
+  padding: 5px 5px;
 }
 
 #products-list:hover {
@@ -227,4 +217,63 @@ p, a, h2 {
   font-weight: 300;
   padding-top: 10px;
   font-size: 16px;
+}
+
+#product-desc {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#product-image {
+  height: 100%;
+  max-width: 50%;
+  float: left;
+  border-radius: 8px;
+} 
+
+#product-title {
+  position: relative;
+}
+
+#buy-button {
+  position: absolute;
+  right: 1.2em;
+  bottom: 1.2em;
+}
+
+#products-main {
+  padding-left: 0;
+  padding-bottom: 15px;
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  .col-xs-12 {
+    width: 50%
+  }
+  p {
+    margin-left: 17%;
+  }
+  #buy-button {
+    top: 4em;
+    position: inherit;
+    right: 1.2%;
+  }
+}
+
+#area-check {
+  padding-bottom: 40px;
+}
+
+#button-check {
+  float: right;
+}
+
+#price-check {
+  float: left;
+  margin-top: 1.1em;
+  font-size: 2em;
+}
+
+#removeIcon {
+  margin-left: 15px;
 }

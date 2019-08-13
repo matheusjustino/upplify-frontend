@@ -4,17 +4,18 @@ import Util from './Util';
 
 export default function Products(props: any) {
     const productItems = props.products.map((product: any) =>
-        <div key={product._id} className="col-lg-3 col-md-3 col-sm-4">
+        <div id="products-main" key={product._id} className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div id="products-list" className="thumbnail text-center">
                 <a href={`#${product._id}`} onClick={(e: any) => props.handleAddToCart(e, product)}>
-                    <img src={require('./images.jpg')} alt={product.title} />
-                    <p id="q">
-                        {product.title}
-                    </p>
+                    <img id="product-image" src={require('./images.jpg')} alt={product.title} />
+                    
                 </a>
-                <div>
+                <p id="product-title">
+                            {product.title}
+                </p>
+                <div id="product-desc" className="row">
                     <b>{Util.formatCurrency(product.price)}</b>
-                    <button className="btn btn-success btn" onClick={(e: any) => props.handleAddToCart(e, product)}>Add</button>
+                    <button id="buy-button" className="btn btn-success" onClick={(e: any) => props.handleAddToCart(e, product)}>Add</button>
                 </div>
             </div>
         </div>
