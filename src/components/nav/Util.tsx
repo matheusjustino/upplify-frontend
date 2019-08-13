@@ -5,10 +5,10 @@ export default {
         return "$" + Number(num.toFixed(2)).toLocaleString() + " ";
     },
     getAllItems: () => {
-        return axios.get("http://localhost:3001/");
+        return axios.get("https://backend-upplify.herokuapp.com/");//http://localhost:3001/"
     },
     getFilteredItems: async function (filter: string) {
-        const items: any = await axios.get("http://localhost:3001/").then(res => {
+        const items: any = await axios.get("https://backend-upplify.herokuapp.com/").then(res => {
             return res.data
         });
         let newFilteredProducts: any = [];
