@@ -8,17 +8,11 @@ export default {
     getAllItems: () => {
         return axios.get("https://backend-upplify.herokuapp.com/");//http://localhost:3001/"
     },
-    getFilteredItems: async function (filter: string) {
-        const items: any = await axios.get("https://backend-upplify.herokuapp.com/").then(res => {
+    getFilteredItems: function (filter: string) {
+        const items: any = axios.get(`https://backend-upplify.herokuapp.com/${filter}`).then(res => {
             return res.data
         });
-        let newFilteredProducts: any = [];
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].cuisine === filter) {
-                newFilteredProducts.push(items[i]);
-            }
-        }
-        return newFilteredProducts;
+        return items;
     },
     Add: function (productList: never[], product: any) {
         let newProds: any = [];
