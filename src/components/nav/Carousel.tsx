@@ -4,9 +4,9 @@ import React from 'react';
 export default function Carrosel() {
 
   return (
-    <div className="container">
+    <div>
       <div className="carousel fade-carousel slide carousel-fade" data-ride="carousel"
-        data-interval="5000" id="bs-carousel">
+        data-interval="3000" id="bs-carousel">
         <ol className="carousel-indicators">
           <li data-target="#bs-carousel" data-slide-to="0" className="active"></li>
           <li data-target="#bs-carousel" data-slide-to="1"></li>
