@@ -5,7 +5,8 @@ import swal from 'sweetalert';
 
 interface myProps {
     cartItems: never[],
-    handleRemoveFromCart: (e: string) => void
+    handleRemoveFromCart: (e: string) => void,
+    handleAddToCart: (e: string) => void
 }
 
 export default function Basket(props: myProps) {
@@ -28,7 +29,8 @@ export default function Basket(props: myProps) {
                                 return (
                                     <li style={{ fontSize: '1.3rem' }} className="list-group-item" key={item._id}>
                                         <b>{item.title} X {item.count} = {Util.formatCurrency(item.price * item.count)}</b>
-                                        <i id="removeIcon" onClick={() => props.handleRemoveFromCart(item)} className="fas fa-times-circle fa-lg"></i>
+                                        <i id="iconsBasket" onClick={() => props.handleRemoveFromCart(item)} className="fas fa-times-circle fa-lg"></i>
+                                        <i id="iconsBasket" onClick={() => props.handleAddToCart(item)} className="fas fa-check-circle fa-lg"></i>
                                     </li>
                                 );
                             })}

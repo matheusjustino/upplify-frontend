@@ -97,7 +97,7 @@ export default function Body() {
                 <a style={{ color: 'white' }} href="#" className="closebtn" onClick={closeSideBar}>×</a>
                 <a style={{ color: 'white' }} href="#">Shopping Cart <i className="fas fa-shopping-cart"></i></a>
                 <hr></hr>
-                <Basket cartItems={cartItemsState} handleRemoveFromCart={handleRemoveCart}></Basket>
+                <Basket cartItems={cartItemsState} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveCart}></Basket>
             </div>
             <div>
                 {main ? <div className="fadeIn">
