@@ -24,7 +24,6 @@ export default function Body() {
             setProducts(initItems.data);
         }
         initLoadItens();
-        setMain(true);
         if (localStorage.getItem('cartItems')) {
             let cart: string | any = localStorage.getItem('cartItems');
             cart = JSON.parse(cart);
