@@ -400,7 +400,7 @@ p, a, h2 {
   background-repeat: no-repeat;
 }
 .fade-carousel .slides .slide-1 {
-  background-image: url('./components/nav/images/coffee.jpg');
+  background-image: url('./components/nav/images/beverage.jpg');
 }
 .fade-carousel .slides .slide-2 {
   background-image: url('./components/nav/images/pizza.jpg');
