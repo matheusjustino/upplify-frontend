@@ -10,7 +10,6 @@ export default function Footer() {
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
                             <h4><b style={{ color: 'white' }}>Social</b></h4>
-                            <hr style={{ width: '100%' }}></hr>
                             <ul className="list-unstyled list-inline social text-center">
                                 <li className="list-inline-item"><a href="#"><i className="fab fa-facebook"></i></a></li>
                                 <li className="list-inline-item"><a href="#"><i className="fab fa-twitter"></i></a></li>

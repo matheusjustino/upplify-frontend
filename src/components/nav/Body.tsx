@@ -5,6 +5,7 @@ import Basket from './Basket';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Util from './Util';
+import Carousel from './Carousel';
 // json-server public/db.json --port 3001
 // https://food-delivery-upplify.surge.sh/
 
@@ -12,6 +13,7 @@ import Util from './Util';
 export default function Body() {
     const [renderItemsState, setRenderItems] = useState("All");
     const [sidebarClosed, setSidebarClosed] = useState(false);
+    const [main, setMain] = useState(true);
     const [productsState, setProducts] = useState([]);
     const [cartItemsState, setCartItems] = useState([]);
 
@@ -22,6 +24,7 @@ export default function Body() {
             setProducts(initItems.data);
         }
         initLoadItens();
+        setMain(true);
         if (localStorage.getItem('cartItems')) {
             let cart: string | any = localStorage.getItem('cartItems');
             cart = JSON.parse(cart);
@@ -84,6 +87,7 @@ export default function Body() {
             const filteredItems = await Util.getFilteredItems(e);
             setProducts(filteredItems);
         }
+        setMain(false);
     }
 
 
@@ -96,10 +100,22 @@ export default function Body() {
                 <hr></hr>
                 <Basket cartItems={cartItemsState} handleRemoveFromCart={handleRemoveCart}></Basket>
             </div>
-            <div id="style-1" data-spy="scroll" className="scrollspy container" style={{ marginTop: '60px' }}>
-                <div>
-                    <Products products={productsState} handleAddToCart={handleAddToCart}></Products>
-                </div>
+            <div>
+                {main ? <div className="fadeIn">
+                    <Carousel></Carousel>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 text-center my-5">
+                                <h1>WE ARE UPPLIFY</h1>
+                                <p>What do you need?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+
+                :
+
+                <div id="style-1" data-spy="scroll" className="scrollspy container" style={{ marginTop: '60px' }}> <Products products={productsState} handleAddToCart={handleAddToCart}></Products></div>}
             </div>
             <Footer></Footer>
         </div>
