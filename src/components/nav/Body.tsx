@@ -91,7 +91,7 @@ export default function Body() {
 
 
     return (
-        <div>
+        <div style={{display:'grid'}}>
             <Navbar renderItems={renderItems} openSideBar={openSideBar}></Navbar>
             <div style={{ borderRight: '1px solid' }} id="mySidebar" className="sidebar">
                 <a style={{ color: 'white' }} href="#" className="closebtn" onClick={closeSideBar}>×</a>

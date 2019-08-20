@@ -13,7 +13,6 @@ export default function Products(props: myProps) {
             <div id="products-list" className="thumbnail text-center">
                 <a href={`#${product._id}`} onClick={() => props.handleAddToCart(product)}>
                     <img id="product-image" src={require('./images/images.jpg')} alt={product.title} />
-
                 </a>
                 <p id="product-title">
                     {product.title}
