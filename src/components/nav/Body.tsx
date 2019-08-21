@@ -114,7 +114,7 @@ export default function Body() {
 
                 :
 
-                <div id="style-1" data-spy="scroll" className="scrollspy container" style={{ marginTop: '60px' }}> <Products products={productsState} handleAddToCart={handleAddToCart}></Products></div>}
+                <div id="style-1" data-spy="scroll" className="scrollspy container"> <Products products={productsState} handleAddToCart={handleAddToCart}></Products></div>}
             </div>
             <Footer></Footer>
         </div>

@@ -9,7 +9,7 @@ interface myProps {
 export default function Navbar(props: myProps) {
 
     return (
-        <nav id="navMain" className="navbar navbar-default" style={{ background: '#D72638' }}>
+        <nav id="navMain" className="navbar navbar-default" style={{ background: '#D72638', marginBottom: 'auto' }}>
             <div className="navbar-header">
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
                     <span className="icon-bar"></span>

@@ -4,7 +4,7 @@ import React from 'react';
 export default function Footer() {
 
     return (
-        <section id="footer" style={{ background: '#D72638' }}>
+        <section id="footer" style={{ background: '#D72638', marginTop: 'auto' }}>
             <div className="container">
                 <div className="row text-center text-xs-center text-sm-left text-md-left">
                     <div className="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
